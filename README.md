@@ -29,5 +29,7 @@ Telegram RoBot to Upload Links.
 * [Dan Tès](https://t.me/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
 * [Yoily](https://t.me/YoilyL) for his [UploaditBot](https://telegram.dog/UploaditBot)
 
+[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/AL-Noman-21/Link-Uploader-Bot)
+
 #### LICENSE
 - GPLv3
