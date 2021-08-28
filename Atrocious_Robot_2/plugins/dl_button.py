@@ -204,7 +204,6 @@ async def ddl_call_back(bot, update):
                         start_time
                     )
                 )
-                await document.forward(Config.LOG_CHANNEL)
             elif tg_send_type == "vm":
                 user = await bot.get_me()
                 mention = user["mention"]
