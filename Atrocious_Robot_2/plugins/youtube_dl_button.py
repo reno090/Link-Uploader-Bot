@@ -9,6 +9,7 @@ import math
 import os
 import shutil
 import time
+from PIL import Image
 from datetime import datetime
 
 # the secret configuration specific things
@@ -25,11 +26,10 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 from pyrogram.types import InputMediaPhoto
 from Atrocious_Robot_2.modules.helper_funcs.url_uploader_helper.display_progress import progress_for_pyrogram, humanbytes
+from Atrocious_Robot_2.modules.helper_funcs.url_uploader_helper.help_Nekmo_ffmpeg import generate_screen_shots
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
-from PIL import Image
-from Atrocious_Robot_2.helper_funcs.help_Nekmo_ffmpeg import generate_screen_shots
 
 
 async def youtube_dl_call_back(bot, update):
