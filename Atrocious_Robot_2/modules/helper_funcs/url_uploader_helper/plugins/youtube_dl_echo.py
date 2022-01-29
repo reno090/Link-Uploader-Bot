@@ -22,6 +22,7 @@ from hachoir.parser import createParser
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant
 
+DOWNLOAD_START = "Now Downloading.."
 
 @pyrogram.Client.on_message(pyrogram.filters.regex(pattern=".*http.*"))
 async def echo(bot, update):
@@ -324,7 +325,7 @@ async def echo(bot, update):
                 str(update.from_user.id) + ".webp",
                 Config.CHUNK_SIZE,
                 None,  # bot,
-                DOWNLOAD_START = "Now Downloading..",
+                DOWNLOAD_START,
                 update.message_id,
                 update.chat.id
             )
