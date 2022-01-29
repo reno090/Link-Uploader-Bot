@@ -24,7 +24,7 @@ if __name__ == "__main__" :
     )
     app = pyrogram.Client(
         "Atrocious_Robot_2",
-        bot_token=Config.TG_BOT_TOKEN,
+        bot_token=Config.TOKEN,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
         plugins=plugins
