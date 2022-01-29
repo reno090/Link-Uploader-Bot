@@ -30,6 +30,12 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
 
+AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS = "Downloaded in {} seconds.\nUploaded in {} seconds.\n"
+CUSTOM_CAPTION_UL_FILE = "{}"
+DOWNLOAD_START = "Downloading file from youtube"
+RCHD_TG_API_LIMIT = "Downloaded in {} seconds.\nDetected File Size: {}\nSorry. But, I cannot upload files greater than 2GB due to Telegram API limitations."
+UPLOAD_START = "Uploading in telegram"
+
 
 async def youtube_dl_call_back(bot, update):
     cb_data = update.data
@@ -92,13 +98,13 @@ async def youtube_dl_call_back(bot, update):
                 l = entity.length
                 youtube_dl_url = youtube_dl_url[o:o + l]
     await bot.edit_message_text(
-        text=Translation.DOWNLOAD_START,
+        text= DOWNLOAD_START,
         chat_id=update.message.chat.id,
         message_id=update.message.message_id
     )
     user = await bot.get_me()
     mention = user["mention"]
-    description = Translation.CUSTOM_CAPTION_UL_FILE.format(mention)
+    description = CUSTOM_CAPTION_UL_FILE.format(mention)
     if "fulltitle" in response_json:
         description = response_json["fulltitle"][0:1021]
         # escape Markdown and special characters
@@ -182,7 +188,7 @@ async def youtube_dl_call_back(bot, update):
         if file_size > Config.TG_MAX_FILE_SIZE:
             await bot.edit_message_text(
                 chat_id=update.message.chat.id,
-                text=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
+                text= RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
                 message_id=update.message.message_id
             )
         else:
@@ -197,7 +203,7 @@ async def youtube_dl_call_back(bot, update):
             )
             logger.info(images)
             await bot.edit_message_text(
-                text=Translation.UPLOAD_START,
+                text=UPLOAD_START,
                 chat_id=update.message.chat.id,
                 message_id=update.message.message_id
             )
@@ -255,7 +261,7 @@ async def youtube_dl_call_back(bot, update):
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
-                        Translation.UPLOAD_START,
+                        UPLOAD_START,
                         update.message,
                         start_time
                     )
@@ -271,7 +277,7 @@ async def youtube_dl_call_back(bot, update):
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
-                        Translation.UPLOAD_START,
+                        UPLOAD_START,
                         update.message,
                         start_time
                     )
@@ -286,7 +292,7 @@ async def youtube_dl_call_back(bot, update):
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
-                        Translation.UPLOAD_START,
+                        UPLOAD_START,
                         update.message,
                         start_time
                     )
@@ -306,7 +312,7 @@ async def youtube_dl_call_back(bot, update):
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
-                        Translation.UPLOAD_START,
+                        UPLOAD_START,
                         update.message,
                         start_time
                     )
@@ -352,7 +358,7 @@ async def youtube_dl_call_back(bot, update):
             except:
                 pass
             await bot.edit_message_text(
-                text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
+                text=AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
                 chat_id=update.message.chat.id,
                 message_id=update.message.message_id,
                 disable_web_page_preview=True
