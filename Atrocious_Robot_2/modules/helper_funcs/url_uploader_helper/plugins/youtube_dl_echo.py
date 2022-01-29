@@ -324,7 +324,7 @@ async def echo(bot, update):
                 str(update.from_user.id) + ".webp",
                 Config.CHUNK_SIZE,
                 None,  # bot,
-                Translation.DOWNLOAD_START,
+                DOWNLOAD_START = "Now Downloading.."   ,
                 update.message_id,
                 update.chat.id
             )
