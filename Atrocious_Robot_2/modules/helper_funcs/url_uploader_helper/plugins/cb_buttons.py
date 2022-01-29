@@ -23,8 +23,8 @@ import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 from Atrocious_Robot_2.modules.helper_funcs.url_uploader_helper.display_progress import progress_for_pyrogram, humanbytes
-from Atrocious_Robot_2.plugins.youtube_dl_button import youtube_dl_call_back
-from Atrocious_Robot_2.plugins.dl_button import ddl_call_back
+from Atrocious_Robot_2.modules.helper_funcs.url_uploader_helper.plugins.youtube_dl_button import youtube_dl_call_back
+from Atrocious_Robot_2.modules.helper_funcs.url_uploader_helper.plugins.dl_button import ddl_call_back
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
