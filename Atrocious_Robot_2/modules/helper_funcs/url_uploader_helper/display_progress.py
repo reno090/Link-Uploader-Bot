@@ -14,7 +14,6 @@ else:
     from config import Config
 
 # the Strings used for this "thing"
-from translation import Translation
 
 
 async def progress_for_pyrogram(
