@@ -20,9 +20,9 @@ from translation import Translation
 
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
-from Atrocious_Robot_2.helper_funcs.display_progress import humanbytes
-from Atrocious_Robot_2.helper_funcs.help_uploadbot import DownLoadFile
-from Atrocious_Robot_2.helper_funcs.display_progress import progress_for_pyrogram
+from Atrocious_Robot_2.modules.helper_funcs.url_uploader_helper.display_progress import humanbytes
+from Atrocious_Robot_2.modules.helper_funcs.url_uploader_helper.display_progress import progress_for_pyrogram
+from Atrocious_Robot_2.modules.helper_funcs.url_uploader_helper.help_uploadbot import DownLoadFile
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
