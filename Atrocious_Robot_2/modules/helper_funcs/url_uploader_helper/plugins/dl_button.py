@@ -29,6 +29,13 @@ from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
 from PIL import Image
 
+AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS = "Downloaded in {} seconds.\nUploaded in {} seconds.\n\n@xurluploaderbot"
+CUSTOM_CAPTION_UL_FILE = "{}"
+DOWNLOAD_START = "Now Downloading.."
+NO_VOID_FORMAT_FOUND = "ERROR...\n<b>YouTubeDL</b> said: {}"
+SLOW_URL_DECED = "Gosh that seems to be a very slow URL. Since you were screwing my home, I am in no mood to download this file. Meanwhile, why don't you try this:==> https://shrtz.me/PtsVnf6 and get me a fast URL so that I can upload to Telegram, without me slowing down for other users."
+UPLOAD_START = "Now Uploading.."
+RCHD_TG_API_LIMIT = "Downloaded in {} seconds.\nDetected File Size: {}\nSorry. But, I cannot upload files greater than 2GB due to Telegram API limitations."
 
 async def ddl_call_back(bot, update):
     logger.info(update)
@@ -69,10 +76,10 @@ async def ddl_call_back(bot, update):
                 youtube_dl_url = youtube_dl_url[o:o + l]
     user = await bot.get_me()
     mention = user["mention"]
-    description = Translation.CUSTOM_CAPTION_UL_FILE.format(mention)
+    description = CUSTOM_CAPTION_UL_FILE.format(mention)
     start = datetime.now()
     await bot.edit_message_text(
-        text=Translation.DOWNLOAD_START,
+        text= DOWNLOAD_START,
         chat_id=update.message.chat.id,
         message_id=update.message.message_id
     )
@@ -95,7 +102,7 @@ async def ddl_call_back(bot, update):
             )
         except asyncio.TimeOutError:
             await bot.edit_message_text(
-                text=Translation.SLOW_URL_DECED,
+                text= SLOW_URL_DECED,
                 chat_id=update.message.chat.id,
                 message_id=update.message.message_id
             )
@@ -103,7 +110,7 @@ async def ddl_call_back(bot, update):
     if os.path.exists(download_directory):
         end_one = datetime.now()
         await bot.edit_message_text(
-            text=Translation.UPLOAD_START,
+            text= UPLOAD_START,
             chat_id=update.message.chat.id,
             message_id=update.message.message_id
         )
@@ -117,7 +124,7 @@ async def ddl_call_back(bot, update):
         if file_size > Config.TG_MAX_FILE_SIZE:
             await bot.edit_message_text(
                 chat_id=update.message.chat.id,
-                text=Translation.RCHD_TG_API_LIMIT,
+                text= RCHD_TG_API_LIMIT,
                 message_id=update.message.message_id
             )
         else:
@@ -175,7 +182,7 @@ async def ddl_call_back(bot, update):
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
-                        Translation.UPLOAD_START,
+                        UPLOAD_START,
                         update.message,
                         start_time
                     )
@@ -193,7 +200,7 @@ async def ddl_call_back(bot, update):
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
-                        Translation.UPLOAD_START,
+                        UPLOAD_START,
                         update.message,
                         start_time
                     )
@@ -210,7 +217,7 @@ async def ddl_call_back(bot, update):
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
-                        Translation.UPLOAD_START,
+                        UPLOAD_START,
                         update.message,
                         start_time
                     )
@@ -233,7 +240,7 @@ async def ddl_call_back(bot, update):
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
-                        Translation.UPLOAD_START,
+                        UPLOAD_START,
                         update.message,
                         start_time
                     )
@@ -250,14 +257,14 @@ async def ddl_call_back(bot, update):
             time_taken_for_download = (end_one - start).seconds
             time_taken_for_upload = (end_two - end_one).seconds
             await bot.edit_message_text(
-                text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
+                text= AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
                 chat_id=update.message.chat.id,
                 message_id=update.message.message_id,
                 disable_web_page_preview=True
             )
     else:
         await bot.edit_message_text(
-            text=Translation.NO_VOID_FORMAT_FOUND.format("Incorrect Link"),
+            text= NO_VOID_FORMAT_FOUND.format("Incorrect Link"),
             chat_id=update.message.chat.id,
             message_id=update.message.message_id,
             disable_web_page_preview=True
